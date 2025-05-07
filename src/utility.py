@@ -75,3 +75,8 @@ def compare_cards(card1, card2):
         return 1
     else:
         return 2
+    
+def shuffle_cards(cards):
+    """Shuffle the cards randomly"""
+    random.shuffle(cards)
+    return cards
