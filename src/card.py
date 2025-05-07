@@ -31,7 +31,7 @@ class Card:
         
         self.suit = suit.lower()
         self.rank = rank.lower()
-        self.value = Card.rank_values[rank]
+        self.rank_value = Card.rank_values[rank]
 
     def __str__(self):
         return f"{self.rank} of {self.suit}"
