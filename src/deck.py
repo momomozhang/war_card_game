@@ -18,12 +18,9 @@ class Deck:
         for suit in Card.SUITS:
             for rank in Card.RANKS:
                 self.cards.append(Card(suit, rank))
-    
-    def shuffle(self):
-        """Shuffle the deck randomly"""
-        random.shuffle(self.cards)
 
-    def split_card(self):
+
+    def split_deck(self):
         """
         Split the deck by dealing cards alternately to two players.
         
