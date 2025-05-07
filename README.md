@@ -13,11 +13,14 @@ Game logic:
     - whoever wins take all 10 cards, shuffle them, then add all 10 cards to the bottom of their deck
     - if still a draw, repeat the "War" process
 - the player who gets 52 cards, win the game
+- if a player doesn't have enough card to complete a "war", they lose the game.
 
 So far done:
 - define Card class
 - define Deck class
 - define game logic
+- define helper functions in utility.py
+- define PlayerHand class
 
 next to work on:
-- define PlayerHand class
+- main.py
