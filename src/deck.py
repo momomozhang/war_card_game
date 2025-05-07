@@ -37,15 +37,16 @@ class Deck:
             raise ValueError("Deck must have exactly 52 cards to split!")
         
         #Create empty list for each player's cards
-        player1_hand = []
-        player2_hand = []
+        hand1 = []
+        hand2 = []
 
         #Assign the cards to each player alternately
         for index, card in enumerate(self.cards):
             if index % 2 == 0:
-                player1_hand.append(card)
+                hand1.append(card)
             else:
-                player2_hand.append(card)
+                hand2.append(card)
 
-        return player1_hand, player2_hand
+        two_hands = [hand1, hand2]
+        return two_hands
         
