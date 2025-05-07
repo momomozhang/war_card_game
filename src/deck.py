@@ -48,21 +48,4 @@ class Deck:
                 player2_hand.append(card)
 
         return player1_hand, player2_hand
-
-
-    def deal_card(self, position=1):
-        """
-        Draw a card from a specific position from the deck.
-
-        Args:
-            position(int): 
-            - position to deal from (1 = top 1st card)
-            - valid range: 1 to the total number of card of the player's hand
-
-        Returns:
-            picked_card: the card at the specific position
-
-        Raises:
-            IndexError: if position is out of range. It must be between 1 and deck size.
-        """
         
