@@ -73,15 +73,15 @@ class PlayerHand:
         #extend the self.cards list with new shuffled cards
         self.cards.extend(shuffled_new_cards)
 
-def has_cards(self):
-    """
-    Check if the player has any cards left.
+    def has_cards(self):
+        """
+        Check if the player has any cards left.
 
-    Returns:
-        bool: True if player has cards, False otherwise
-    """
-    return len(self.cards) > 0
+        Returns:
+            bool: True if player has cards, False otherwise
+        """
+        return len(self.cards) > 0
 
-def __str__(self):
-    """String representation of the player's hand."""
-    return f"{self.player_name}'s hand has {self.card_count()} cards."
+    def __str__(self):
+        """String representation of the player's hand."""
+        return f"{self.player_name}'s hand has {self.card_count()} cards."
