@@ -1,7 +1,7 @@
 """
 Deck module for the War card game.
 
-This module defines the Deck class. It represents a standard 52 card deck and provides methods for shuffling cards.
+This module defines the Deck class. It represents a standard 52 card deck.
 """
 
 import random
