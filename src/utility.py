@@ -5,8 +5,8 @@ This module provides helper functions used across the game.
 """
 
 import random
-from card import Card
-from player import Player
+from .card import Card
+from .player import Player
 
 def ask_play_game():
     """
@@ -25,7 +25,7 @@ def ask_play_game():
             print("You don't want to play? Sad :(")
             return False
         
-def get_players_name():
+def get_players_names():
     """
     Inform the user now we need 2 players. Ask players enter their names.
 
@@ -34,15 +34,15 @@ def get_players_name():
     """
     player1 = input("Enter the name of Player A: ")
     player2 = input("Enter the name of Player B: ")
-    players = [player1, player2]
-    return players
+    player_names = [player1, player2]
+    return player_names
 
 def shuffle_cards(cards):
     """Shuffle the cards randomly"""
     random.shuffle(cards)
     return cards
 
-def assign_hand(players, two_hands):
+def assign_hand(player_names, two_hands):
     """
     Decide which player get which hand of cards.
 
@@ -84,7 +84,63 @@ def compare_cards(card1, card2):
     else:
         print(f"{card2} wins this round!")
         return 2
+
+def play_round(player1, player2, num_cards=1):
+    """
+    Play a round of the War card game.
+
+    Args:
+        - player1_hand: player1's hand of cards
+        - player2_hand: player2's hand of cards
+        - num_cards: 1 when normal play, 4 in "war. Default to 1.
+    Returns:
+        0: continue game
+        1: player1 wins
+        2: if player2 wins
+    """
+    print(player1.has_cards())
+    print(player2.has_cards())
+
+    # Each player draws a card
+    cards1 = player1.draw_card(num_cards)
+    cards2 = player2.draw_card(num_cards)
+
+    print(f"{player1.player_name} plays: {cards1[-1]}")
+    print(f"{player2.player_name} plays: {cards2[-1]}")
+
+    # compare cards
+    result = compare_cards(cards1[-1], cards2[-1])
+
+    # update table cards
+    cards_to_add = cards1 + cards2
+
+    return result, cards_to_add
+
+"""
+def play_war(player1, player2):
+    """
+    Handle the "war" situation when players draw cards of the same rank.
+    """
+
+    print(player1.has_cards())
+    print(player2.has_cards())
     
+    # 4 cards to draw: first 3 cards to "put aside", 4th card to compare
+    war_player1_4cards = player1.draw_card(4)
+    war_player2_4cards = player2.draw_card(4)
+
+    print(f"{player1.player_name} plays: {war_player1_4cards[-1]}")
+    print(f"{player2.player_name} plays: {war_player2_4cards[-1]}")
+
+    # compare the last cards drawn
+    result = compare_cards(war_player1_4cards[-1], war_player2_4cards[-1])
+
+    # create a list of all cards on the table
+    cards_to_add = war_player1_4cards + war_player2_4cards
+    
+    return result, cards_to_add
+"""
+
 def check_winner(player1, player2, required_cards=1):
     """
     Check if there's a winner based on card count.
@@ -116,65 +172,3 @@ def check_winner(player1, player2, required_cards=1):
 
     # no winner yet
     return 0
-
-def play_round(player1_hand, player2_hand):
-    """
-    Play a "normal" round of the War card game.
-
-    Args:
-        - player1_hand: player1's hand of cards
-        - player2_hand: player2's hand of cards
-
-    Returns:
-        0: continue game
-        1: player1 wins
-        2: if player2 wins
-    """
-    print(player1_hand.has_cards())
-    print(player2_hand.has_cards())
-
-    # Check if either player has no cards or all cards
-    winner = check_winner(player1, player2)
-    if winner != 0:
-        return winner
-    
-    # Each player draws a card
-    cards1 = player1.draw_card(1)
-    cards2 = player.draw_card(1)
-
-    print(f"{player1.player_name} plays: {cards1[0]}")
-    print(f"{player2.player_name} plays: {cards2[0]}")
-
-    # compare cards
-    result = compare_cards(cards1[0], cards2[0])
-
-    # update table cards
-    table_cards = cards1 + cards2
-
-    return result, table_cards
-
-
-def play_war(player1, player2, existing_cards):
-    """
-    Handle the "war" situation when players draw cards of the same rank.
-    """
-
-    # check if either player has no cards or all cards
-    winner = check_winner(player1, player2)
-    if winner != 0:
-        return winner
-    
-    # 4 cards to draw: first 3 cards to "put aside", 4th card to compare
-    war_player1_4cards = player1.draw_card(4)
-    war_player2_4cards = player2.draw_card(4)
-
-    # compare the last cards drawn
-    result = compare_cards(war_player1_4cards[-1], war_player2_4cards[-1])
-
-    # create a list of all cards on the table
-    table_cards = existing_cards + war_player1_4cards + war_player2_4cards
-    # check if there are 10 cards in total
-    if len(all_cards) != 10:
-        raise ValueError(f"Expected 10 total cards after war (2 initial + 4 from each player), but found {len(all_cards)}")
-    
-    return result, table_cards

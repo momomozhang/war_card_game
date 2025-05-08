@@ -4,11 +4,11 @@ Deck module for the War card game.
 This module defines the Deck class. It represents a standard 52 card deck.
 """
 
-import random
-from card import Card
+from .card import Card
+from .utility import shuffle_cards
 
 class Deck:
-    """Define 1) standard 52-card deck 2) the shuffle & split_card & deal_card method"""
+    """Define 1) standard 52-card deck 2) the split_card method"""
 
     def __init__(self):
         """Create a deck with 52 cards"""
