@@ -4,10 +4,10 @@ Main module for the War card game.
 It implements the core game loop.
 """
 
-from .card import Card
-from .deck import Deck
-from .player import Player 
-from .utility import *
+from card import Card
+from deck import Deck
+from player import Player 
+from utility import *
 
 def main():
     """Main function to run the War card game."""
@@ -21,7 +21,7 @@ def main():
 
     # create, shuffle, and split a deck
     deck = Deck()
-    deck.cards.shuffle_cards()
+    deck.shuffle_deck()
     two_hands = deck.split_deck()
 
     #assign hands to players
@@ -42,18 +42,19 @@ def main():
 
     while True:
         print(f"\n-----Round {round}-----")
-        print(f"\nCurrent {player1.name} has {player1.has_cards()} cards,\n{player2.name} has {player2.has_cards()} cards.")
+        print(str(player1))
+        print(str(player2))
 
         # check for winner before starting a new round 
         winner_check = check_winner(player1, player2, 4 if war_on else 1)
         if winner_check == 1:
             print(f"\n{player1.name} has won the game!")
-            if war_on and player2.has_cards() < 4:
+            if war_on and len(player2.cards()) < 4:
                 print(f"\nBecause {player2.name} doesn't have enough cards to start a War!")
             break
         elif winner_check == 2:
             print(f"\n{player2.name} has won the game!")
-            if war_on and player1.has_cards() < 4:
+            if war_on and len(player1.cards()) < 4:
                 print(f"\nBecause {player1.name} doesn't have enough cards to start a War!")
             break
         else:

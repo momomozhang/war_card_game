@@ -4,8 +4,8 @@ Player module for the War Card Game.
 This module defines Player class. It represents a player's collection of cards during the game.
 """
 
-from .card import Card
-from .utility import shuffle_cards
+import random
+from card import Card
 
 class Player:
     """A player's hand of cards during the war game."""
@@ -56,7 +56,7 @@ class Player:
             self.cards = self.cards[count:]
         return drawn_cards
     
-    def add_cards(self, new_cards):
+    def add_cards(self, table_cards):
         """
         Add new cards to the bottom of the player's hand.
 
@@ -65,9 +65,9 @@ class Player:
         """
 
         # Shuffle the cards before adding the cards
-        shuffled_new_cards = shuffle_cards(new_cards)
+        random.shuffle(table_cards)
         #extend the self.cards list with new shuffled cards
-        self.cards.extend(shuffled_new_cards)
+        self.cards.extend(table_cards)
 
     def has_cards(self):
         """
@@ -80,4 +80,4 @@ class Player:
 
     def __str__(self):
         """String representation of the player's hand."""
-        return f"{self.player_name}'s hand has {self.card_count()} cards."
+        return f"\n{self.name}'s hand has {self.card_count()} cards."

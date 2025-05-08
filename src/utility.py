@@ -5,8 +5,8 @@ This module provides helper functions used across the game.
 """
 
 import random
-from .card import Card
-from .player import Player
+from card import Card
+from player import Player
 
 def ask_play_game():
     """
@@ -98,15 +98,13 @@ def play_round(player1, player2, num_cards=1):
         1: player1 wins
         2: if player2 wins
     """
-    print(player1.has_cards())
-    print(player2.has_cards())
 
     # Each player draws a card
     cards1 = player1.draw_card(num_cards)
     cards2 = player2.draw_card(num_cards)
 
-    print(f"{player1.player_name} plays: {cards1[-1]}")
-    print(f"{player2.player_name} plays: {cards2[-1]}")
+    print(f"{player1.name} plays: {cards1[-1]}")
+    print(f"{player2.name} plays: {cards2[-1]}")
 
     # compare cards
     result = compare_cards(cards1[-1], cards2[-1])
@@ -115,31 +113,6 @@ def play_round(player1, player2, num_cards=1):
     cards_to_add = cards1 + cards2
 
     return result, cards_to_add
-
-"""
-def play_war(player1, player2):
-    """
-    Handle the "war" situation when players draw cards of the same rank.
-    """
-
-    print(player1.has_cards())
-    print(player2.has_cards())
-    
-    # 4 cards to draw: first 3 cards to "put aside", 4th card to compare
-    war_player1_4cards = player1.draw_card(4)
-    war_player2_4cards = player2.draw_card(4)
-
-    print(f"{player1.player_name} plays: {war_player1_4cards[-1]}")
-    print(f"{player2.player_name} plays: {war_player2_4cards[-1]}")
-
-    # compare the last cards drawn
-    result = compare_cards(war_player1_4cards[-1], war_player2_4cards[-1])
-
-    # create a list of all cards on the table
-    cards_to_add = war_player1_4cards + war_player2_4cards
-    
-    return result, cards_to_add
-"""
 
 def check_winner(player1, player2, required_cards=1):
     """

@@ -13,7 +13,7 @@ class Card:
     RANKS = ["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "jack", "queen", "king", "ace"]
 
     #creating numeric rank value
-    rank_values = dict(zip(RANKS, range(2, 14)))
+    rank_values = dict(zip(RANKS, range(2, 15)))
 
     def __init__(self, suit, rank):
         """
