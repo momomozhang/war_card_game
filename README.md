@@ -21,6 +21,9 @@ So far done:
 - define game logic
 - define helper functions in utility.py
 - define PlayerHand class
+- main.py
 
 next to work on:
-- main.py
+- now the basic game works, however really passive and boring
+- update the README.py to give details of this projects and lessons learned
+- then we can move to the next project! The next one will be a project that has real life values
