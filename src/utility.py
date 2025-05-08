@@ -31,9 +31,9 @@ def get_players_name():
     Return:
         A list of two player names.
     """
-    player_a = input("Enter the name of Player A: ")
-    player_b = input("Enter the name of Player B: ")
-    players = [player_a, player_b]
+    player1 = input("Enter the name of Player A: ")
+    player2 = input("Enter the name of Player B: ")
+    players = [player1, player2]
     return players
 
 def assign_hand_to_player(players, two_hands):
@@ -51,8 +51,8 @@ def assign_hand_to_player(players, two_hands):
     random.shuffle(two_hands)
 
     # assign the hands of cards to players randomly
-    player_a_hand = two_hands[0]
-    player_b_hand = two_hands[1]
+    player1_hand = two_hands[0]
+    player2_hand = two_hands[1]
 
     return player_a_hand, player_b_hand
 
@@ -80,3 +80,59 @@ def shuffle_cards(cards):
     """Shuffle the cards randomly"""
     random.shuffle(cards)
     return cards
+
+def check_winner(player1, player2, required_cards=1):
+    """
+    Check if there's a winner based on card count.
+
+    Args:
+        player1 & player2: two player names
+        required_cards: number of cards required for the next draw. 1 for normal play, 4 for "war"
+
+    Returns:
+        0: no winner yet
+        1: player1 wins
+        2: player2 wins
+    """
+    # check if either player has all 52 cards
+    if player1.card_count() == 52:
+        print(f"\n{player1} has all 52 cards!\n {player1} wins!")
+        return 1 #player1 wins
+    elif player2.card_count() == 52:
+        print(f"\n{player2} has all 52 cards!\n {player2} wins!")
+        return 2 #player2 wins
+
+    # check if either player doesn't have enough cards for the next draw
+    if player1.card_count() < required_cards:
+        print(f"\n{player1} doesn't have enough cards to continue.\n{player2} wins!")
+        return 2 #player2 wins
+    elif player2.card_count() < required_cards:
+        print(f"\n{player2} doesn't have enough cards to continue.\n{player1} wins!")
+        return 1 #player1 wins
+
+    # no winner yet
+    return 0
+
+def handle_war(player1, player2, existing_cards):
+    """
+    Handle the "war" situation when players draw cards of the same rank.
+    """
+
+    # 4 cards to draw: first 3 cards to "put aside", 4th card to compare
+    war_cards1 = player1.draw_card(4)
+    war_cards2= player2.draw_card(4)
+
+    # compare the last cards drawn
+    result = compare_cards(war_cards1[-1], war_cards2[-1])
+
+    # create a list of all cards on the table
+    table_cards = existing_cards + war_cards1 + war_cards2
+    # check if there are 10 cards in total
+    if len(all_cards) != 10:
+        raise ValueError(f"Expected 10 total cards after war (2 initial + 4 from each player), but found {len(all_cards)}")
+    
+    # the cards to compare
+    player1_war_card = war_cards1[-1]
+    player2_war_card = war_cards2[-1]
+    
+    return player1_war_card, player2_war_card, table_cards
