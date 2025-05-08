@@ -1,13 +1,13 @@
 """
-PlayerHand module for the War Card Game.
+Player module for the War Card Game.
 
-This module defines PlayerHand class. It represents a player's collection of cards during the game.
+This module defines Player class. It represents a player's collection of cards during the game.
 """
 
 from card import Card
 from utility import shuffle_cards
 
-class PlayerHand:
+class Player:
     """A player's hand of cards during the war game."""
 
     def __init__(self, player_name, cards=None):
