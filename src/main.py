@@ -8,6 +8,7 @@ from card import Card
 from deck import Deck
 from player import Player 
 from utility import *
+import time 
 
 def main():
     """Main function to run the War card game."""
@@ -17,6 +18,7 @@ def main():
         return
 
     # get player names
+    time.sleep(1)
     player_names = get_players_names()
 
     # create, shuffle, and split a deck
@@ -32,8 +34,9 @@ def main():
     player2 = Player(player_names[1], player2_cards)
 
     # print player names and start the game
-    print(f"We have {player1.name} and {player2.name}!")
+    print(f"\nWe have {player1.name} and {player2.name}!")
     print("\nLet's start the game!")
+    time.sleep(2)  # Pause for 2 seconds
 
     # main game loop
     round = 1
@@ -42,6 +45,7 @@ def main():
 
     while True:
         print(f"\n-----Round {round}-----")
+        #print("\n")
         print(str(player1))
         print(str(player2))
 
@@ -69,23 +73,27 @@ def main():
             result, cards_to_add = play_round(player1, player2, 4)
             table_cards += cards_to_add
 
+            time.sleep(2)
+
             if result == 1:
                 print(f"\n{player1.name} wins the War and takes all the cards on the table!")
                 player1.add_cards(table_cards)
                 war_on = False
             elif result == 2:
-                print(f"{player2.name} wins the War and takes all the cards on the table!")
+                print(f"\n{player2.name} wins the War and takes all the cards on the table!")
                 player2.add_cards(table_cards)
                 war_on = False
             elif result == 0:
-                print("It's a draw. Another War!")
+                print("\nIt's a draw. Another War!")
                 war_on = True
             else:
-                raise ValueError("War result went wrong.")
+                raise ValueError("\nWar result went wrong.")
         
         if not war_on:
             result, cards_to_add = play_round(player1, player2, 1)
             table_cards += cards_to_add
+
+            time.sleep(2)
 
             if result == 1:
                 print(f"\n{player1.name} wins this round and takes all the cards on the table!")
@@ -94,11 +102,16 @@ def main():
                 print(f"\n{player2.name} wins this round and takes all the cards on the table!")
                 player2.add_cards(table_cards)
             elif result == 0:
-                print("It's a draw! War is on!")
+                print("\nIt's a draw! War is on!")
                 war_on = True
             else:
-                raise ValueError("Round result went wrong.")
-            
+                raise ValueError("\nRound result went wrong.")
+        
+        # slow down the game to make it a bit less mechanical
+        time.sleep(1)
+        print("\nMoving to next round in 3 seconds...")
+        time.sleep(3)  # Pause for 3 seconds
+
         # increment the round count
         round += 1
 
