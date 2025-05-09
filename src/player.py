@@ -80,4 +80,4 @@ class Player:
 
     def __str__(self):
         """String representation of the player's hand."""
-        return f"{self.name}'s hand has {self.card_count()} cards."
+        return f"{self.name} has {self.card_count()} cards."
