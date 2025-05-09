@@ -1,29 +1,96 @@
-# war_card_game
+# War Card Game
 
-Game logic:
-- Ask user if they want to play
-- If yes, ask input to acquire the players' names 
-- create a 52-card standard deck
-- first decide which player gets the 1st card, then deal the deck alternately to 2 players
-- each player draw 1 card from the top of their respective deck
-- whoever wins take both cards, shuffle them, then add both cards to the bottom of their deck
-- in case of a draw, a "War" starts:
-    - draw 4 more cards from each players' deck
-    - compare their 4th card
-    - whoever wins take all 10 cards, shuffle them, then add all 10 cards to the bottom of their deck
-    - if still a draw, repeat the "War" process
-- the player who gets 52 cards, win the game
-- if a player doesn't have enough card to complete a "war", they lose the game.
+A terminal-based implementation of the classic card game "War" I built while learning Python & Git/Github.
 
-So far done:
-- define Card class
-- define Deck class
-- define game logic
-- define helper functions in utility.py
-- define PlayerHand class
-- main.py
+## Game Rules
 
-next to work on:
-- now the basic game works, however really passive and boring
-- update the README.py to give details of this projects and lessons learned
-- then we can move to the next project! The next one will be a project that has real life values
+I've implemented the classic War card game with these rules:
+* Each player gets half of a standard 52-card deck
+* On each turn, both players flip their top card
+* Highest card wins (2 is lowest, Ace is highest)
+* Winner takes both cards and puts them at the bottom of their deck
+* If there's a tie, it triggers a "War":
+   * Both players place 3 cards face down
+   * They flip a 4th card, highest card wins all 10 cards
+   * If there's another tie, the War continues
+* Game ends when someone collects all 52 cards
+* If a player doesn't have enough cards for a War, they lose
+
+## Project Structure
+
+```
+war_card_game/
+├── __init__.py
+├── card.py        # Defines a playing card
+├── deck.py        # Handles creating and splitting the deck
+├── player.py      # Manages each player's cards and actions
+├── utility.py     # Contains game helper functions
+└── main.py        # Runs the main game loop
+```
+
+## What I Learned
+
+### Python Skills:
+* Creating classes, objects, and functions
+* Writing modular code
+* Adding proper error handling
+* Using dunder methods like __str__
+* Writing good docstrings
+
+### Git & GitHub Experience:
+* Making commits
+* Using tags for version tracking
+* Pushing code to remote repos
+* Managing project files
+
+## Key Takeaways
+
+1. **Plan Before Coding**: With tools like GitHub Copilot and Claude AI around, I realized I need to be my own product manager. Sketching out the project and specifications before writing any code is vital.
+
+2. **Module Organization Matters**: Breaking the code into logical files made everything easier to manage. I don't want to think about debugging this if it was all in one file!
+
+3. **Document Everything**: Future-me will thank present-me for all those comments and docstrings.
+
+4. **Design Classes Carefully**: Spending time thinking about how the Card, Deck, and Player classes should work together paid off. The game logic flows naturally.
+
+## What's Next
+
+In an ideal world, below features could be added:
+* Unittests
+* Proper web-based interface
+* Save/load game feature
+* Game statistics (longest war, quickest win, etc.)
+* Current game rules require no player strategy. It's purely random. To make it fun for the user, could modify the game rules to allow user strategies.
+* AI / Computer opponent
+
+However, I won't have time to continue this project. I'm moving to the next stage: building a real life relevant application using AWS services!
+
+## Skills To Build
+
+* **Product Thinking**: Get better at planning features and project specs
+* **Clean Code**: Keep studying best practices for readable, maintainable code
+* **Testing**: Learn how to write proper unit tests
+* **UI Design**: Explore basic UI principles even for simple projects
+
+## How to Run the Game
+
+1. Clone this repo:
+```bash
+git clone https://github.com/yourusername/war_card_game.git
+cd war_card_game
+```
+
+2. Run the game:
+```bash
+python main.py
+```
+
+3. Follow the prompts and enjoy!
+
+## Want to Help?
+
+Feel free to fork the repo and make improvements. Just submit a PR with your changes.
+
+---
+
+Made with ☕ and Python
