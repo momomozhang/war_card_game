@@ -15,10 +15,11 @@ class Player:
         Initialize a player's hand with name and cards.
 
         Args:
-            player_name (str): output from main.py
+            name (str): output from main.py
             cards (list, optional): a list of card object, default to None
         """
         self.name = name
+        # If no cards provided, create empty hand
         self.cards = cards if cards is not None else []
 
     def card_count(self):
@@ -30,44 +31,45 @@ class Player:
         """
         return len(self.cards)
     
-    def draw_card(self, count):
+    def draw_card(self, num_cards):
         """
-        Draw a specific number of cards from the top of the player's hand.
+        Draw a specific number of cards from the top of the player's hand. 
+        When the player has less cards than the required, return an empty list.
+        Else, draw the first num_cards} amount of cards.
+        Update self.cards to the current remaining cards.
 
         Args:
             count: number of cards to draw. 
             It should equal to 1 during normal play, equal to 4 during "war" (3 cards to put aside, 4th card to compare)
         
         Returns:
-            When the player has less cards than the required, return an empty list.
-            Else, draw the first {count} amount of cards.
-            Update self.cards to the current remaining cards.
+            drawn_cards: List of cards drawn, or empty list when insufficient cards
         """
-        if count != 1 and count != 4:
+        if num_cards != 1 and num_cards != 4:
             raise ValueError("Draw 1 card during normal play. Draw 4 cards during \"war\"!")
 
         # when a player has less card(s) than the required number, return empty list
-        if len(self.cards) < count:
+        if len(self.cards) < num_cards:
             return []
         else:
             #draw the required number of cards
-            drawn_cards = self.cards[:count]
+            drawn_cards = self.cards[:num_cards]
             #update the player's remaining cards
-            self.cards = self.cards[count:]
+            self.cards = self.cards[num_cards:]
         return drawn_cards
     
-    def add_cards(self, table_cards):
+    def add_cards(self, cards_on_table):
         """
-        Add new cards to the bottom of the player's hand.
+        Add the cards on the table to the bottom of the player's hand.
 
         Args:
-            new_cards: a list of Card objects to add. 
+            cards_on_table: The list of Card objects, die both players have drawn from previous round(s)
         """
 
         # Shuffle the cards before adding the cards
-        random.shuffle(table_cards)
+        random.shuffle(cards_on_table)
         #extend the self.cards list with new shuffled cards
-        self.cards.extend(table_cards)
+        self.cards.extend(cards_on_table)
 
     def has_cards(self):
         """

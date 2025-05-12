@@ -9,6 +9,15 @@ import time
 from card import Card
 from player import Player
 
+DRAW = 0
+PLAYER1_WINS = 1
+PLAYER2_WINS = 2
+STANDARD_DECK_SIZE = 52
+
+RESPONSE_PAUSE_SECONDS = 0.5
+ROUND_PAUSE_SECONDS = 1
+NEXT_ROUND_PAUSE_SECONDS = 1.5
+
 def ask_play_game():
     """
     Ask the user if they want to play the game.
@@ -20,7 +29,7 @@ def ask_play_game():
     while True:
         print("\n")
         response = input("Do you want to play War? (yes/no): ").lower()
-        time.sleep(0.5)
+        time.sleep(RESPONSE_PAUSE_SECONDS)
         if response.startswith("y"):
             print("\nYaaay! Let's play!")
             return True
@@ -33,11 +42,11 @@ def get_players_names():
     Inform the user now we need 2 players. Ask players enter their names.
 
     Return:
-        A list of two player names.
+        player_names: a list of two player names.
     """
     print("\n")
     player1 = input("Enter the name of Player A: ")
-    time.sleep(0.5)
+    time.sleep(RESPONSE_PAUSE_SECONDS)
     player2 = input("Enter the name of Player B: ")
     player_names = [player1, player2]
     return player_names
@@ -47,13 +56,13 @@ def shuffle_cards(cards):
     random.shuffle(cards)
     return cards
 
-def assign_hand(player_names, two_hands):
+def distribute_hands_to_players(player_names, two_hands):
     """
     Decide which player get which hand of cards.
 
     Args:
-        - A list of both player's names.
-        - A list of both hands of cards.
+        player_names: a list of both player names.
+        two_hands: a nested list of two hands.
 
     Returns:
         the hand of cards for each player.
@@ -76,41 +85,41 @@ def compare_cards(card1, card2):
         card2: card from player2
 
     Returns:
-        1: if card1 is bigger
-        2: if card2 is bigger
-        0: if it's a tie
+        PLAYER1_WINS: if card1 is bigger
+        PLAYER2_WINS: if card2 is bigger
+        DRAW: if it's a tie
     """
     if card1.rank_value == card2.rank_value:
         print(f"\nBoth cards have same rank. This round is a draw!")
-        return 0
+        return DRAW
     elif card1.rank_value > card2.rank_value:
         print(f"\n{card1} wins this round!")
-        return 1
+        return PLAYER1_WINS
     else:
         print(f"\n{card2} wins this round!")
-        return 2
+        return PLAYER2_WINS
 
-def play_round(player1, player2, num_cards=1):
+def play_round(player1, player2, cards_to_draw=1):
     """
     Play a round of the War card game.
 
     Args:
         - player1_hand: player1's hand of cards
         - player2_hand: player2's hand of cards
-        - num_cards: 1 when normal play, 4 in "war. Default to 1.
+        - cards_to_draw: 1 when normal play, 4 in "war. Default to 1.
     Returns:
-        0: continue game
-        1: player1 wins
-        2: if player2 wins
+        DRAW: continue game
+        PLAYER1_WINS: player1 wins
+        PLAYER2_WINS: if player2 wins
     """
 
     # Each player draws a card
-    cards1 = player1.draw_card(num_cards)
-    cards2 = player2.draw_card(num_cards)
+    cards1 = player1.draw_card(cards_to_draw)
+    cards2 = player2.draw_card(cards_to_draw)
 
     print(f"\n{player1.name} plays: {cards1[-1]}")
     print(f"{player2.name} plays: {cards2[-1]}")
-    time.sleep(2)  # Pause for 1 second
+    time.sleep(ROUND_PAUSE_SECONDS)  # Pause for 2 second
 
     # compare cards
     result = compare_cards(cards1[-1], cards2[-1])
@@ -129,23 +138,23 @@ def check_winner(player1, player2, required_cards=1):
         required_cards: number of cards required for the next draw. 1 for normal play, 4 for "war"
 
     Returns:
-        0: no winner yet
-        1: player1 wins
-        2: player2 wins
+        DRAW: no winner yet
+        PLAYER1_WINS: player1 wins
+        PLAYER2_WINS: player2 wins
     """
-    time.sleep(2)  # Pause for 1 second
+    time.sleep(ROUND_PAUSE_SECONDS)  # Pause for 2 second
 
     # check if either player has all 52 cards
-    if player1.card_count() == 52:
-        return 1 #player1 wins
-    elif player2.card_count() == 52:
-        return 2 #player2 wins
+    if player1.card_count() == STANDARD_DECK_SIZE:
+        return PLAYER1_WINS #player1 wins
+    elif player2.card_count() == STANDARD_DECK_SIZE:
+        return PLAYER2_WINS #player2 wins
 
     # check if either player doesn't have enough cards for the next draw
     if player1.card_count() < required_cards:
-        return 2 #player2 wins
+        return PLAYER2_WINS #player2 wins
     elif player2.card_count() < required_cards:
-        return 1 #player1 wins
+        return PLAYER1_WINS #player1 wins
 
     # no winner yet
-    return 0
+    return DRAW

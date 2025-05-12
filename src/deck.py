@@ -10,6 +10,9 @@ from card import Card
 class Deck:
     """Define 1) standard 52-card deck 2) the split_card method"""
 
+    STANDARD_DECK_SIZE = 52
+    NUMBER_OF_PLAYERS = 2
+
     def __init__(self):
         """Create a deck with 52 cards"""
         self.cards = [] #create an empty card list
@@ -19,11 +22,11 @@ class Deck:
             for rank in Card.RANKS:
                 self.cards.append(Card(suit, rank))
 
-    def shuffle_deck(self):
+    def shuffle(self):
+        """Shuffle the deck randomly."""
         random.shuffle(self.cards)
-        return self.cards
 
-    def split_deck(self):
+    def split_in_half(self):
         """
         Split the deck by dealing cards alternately to two players.
         
@@ -33,8 +36,8 @@ class Deck:
         Raises:
             ValueError: when the deck doesn't have exactly 52 cards.
         """
-        if len(self.cards) != 52:
-            raise ValueError("Deck must have exactly 52 cards to split!")
+        if len(self.cards) != self.STANDARD_DECK_SIZE:
+            raise ValueError("Deck must have exactly {self.STANDARD_DECK_SIZE} cards to split!")
         
         #Create empty list for each player's cards
         hand1 = []

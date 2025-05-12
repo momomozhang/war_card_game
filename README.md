@@ -36,6 +36,7 @@ war_card_game/
 * Adding proper error handling
 * Using dunder methods like __str__
 * Writing good docstrings
+* Debugging
 
 ### Git & GitHub Experience:
 * Making commits

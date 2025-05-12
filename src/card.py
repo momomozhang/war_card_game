@@ -8,18 +8,22 @@ with a suit and rank.
 class Card:
     """A playing card with suits and ranks."""
 
-    # define valid suits and ranks
+    # Define valid suits and ranks
     SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
     RANKS = ["Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
 
-    #creating numeric rank value
-    rank_values = dict(zip(RANKS, range(2, 15)))
+    # Creating numeric rank value
+    RANK_TO_VALUE_MAP = dict(zip(RANKS, range(2, 15)))
 
     def __init__(self, suit, rank):
         """
-        initialize a card with suit and rank
+        Initialize a card with suit and rank
 
-        raises:
+        Args:
+            suit(str): the suit of the card
+            rank(str): the rank of the card
+
+        Raises:
             ValueError: if suit or rank is invalid
         """
 
@@ -31,11 +35,10 @@ class Card:
         
         self.suit = suit
         self.rank = rank
-        self.rank_value = Card.rank_values[rank]
+        self.rank_value = Card.RANK_TO_VALUE_MAP[rank]
 
     def __str__(self):
+        """Return a string representation of the card."""
         return f"{self.rank} of {self.suit}"
-    
-    def __repr__(self):
-        return f"Card('{self.suit}', '{self.rank}')"
+
     
