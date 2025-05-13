@@ -63,7 +63,7 @@ class Player:
         Add the cards on the table to the bottom of the player's hand.
 
         Args:
-            cards_on_table: The list of Card objects, die both players have drawn from previous round(s)
+            cards_on_table: The list of Card objects, the both players have drawn from previous round(s)
         """
 
         # Shuffle the cards before adding the cards
