@@ -119,7 +119,7 @@ def play_round(player1, player2, cards_to_draw=1):
 
     print(f"\n{player1.name} plays: {cards1[-1]}")
     print(f"{player2.name} plays: {cards2[-1]}")
-    time.sleep(ROUND_PAUSE_SECONDS)  # Pause for 2 second
+    time.sleep(ROUND_PAUSE_SECONDS)
 
     # compare cards
     result = compare_cards(cards1[-1], cards2[-1])
@@ -142,7 +142,7 @@ def check_winner(player1, player2, required_cards=1):
         PLAYER1_WINS: player1 wins
         PLAYER2_WINS: player2 wins
     """
-    time.sleep(ROUND_PAUSE_SECONDS)  # Pause for 2 second
+    time.sleep(ROUND_PAUSE_SECONDS)
 
     # check if either player has all 52 cards
     if player1.card_count() == STANDARD_DECK_SIZE:
