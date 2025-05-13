@@ -146,15 +146,15 @@ def check_winner(player1, player2, required_cards=1):
 
     # check if either player has all 52 cards
     if player1.card_count() == STANDARD_DECK_SIZE:
-        return PLAYER1_WINS #player1 wins
+        return PLAYER1_WINS
     elif player2.card_count() == STANDARD_DECK_SIZE:
-        return PLAYER2_WINS #player2 wins
+        return PLAYER2_WINS
 
     # check if either player doesn't have enough cards for the next draw
     if player1.card_count() < required_cards:
-        return PLAYER2_WINS #player2 wins
+        return PLAYER2_WINS
     elif player2.card_count() < required_cards:
-        return PLAYER1_WINS #player1 wins
+        return PLAYER1_WINS
 
     # no winner yet
     return DRAW
