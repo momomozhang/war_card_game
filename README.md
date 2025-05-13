@@ -37,11 +37,13 @@ war_card_game/
 * Using dunder methods like __str__
 * Writing good docstrings
 * Debugging
+* Clean code practices: meaningful names
 
 ### Git & GitHub Experience:
 * Making commits
 * Using tags for version tracking
 * Pushing code to remote repos
+* Branching and pull requests
 * Managing project files
 
 ## Key Takeaways
@@ -69,7 +71,6 @@ However, I won't have time to continue this project. I'm moving to the next stag
 ## Skills To Build
 
 * **Product Thinking**: Get better at planning features and project specs
-* **Clean Code**: Keep studying best practices for readable, maintainable code
 * **Testing**: Learn how to write proper unit tests
 * **UI Design**: Explore basic UI principles even for simple projects
 
